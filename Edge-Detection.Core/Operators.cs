@@ -1,6 +1,6 @@
 namespace Edge_Detection.Core
 {
-    enum DetectionOperator
+    public enum DetectionOperator
     {
         Sobel,
         Prewitt
