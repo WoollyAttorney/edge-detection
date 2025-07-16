@@ -1,43 +1,37 @@
 ﻿using Edge_Detection.Core;
 using SkiaSharp;
 
-namespace Edge_Detectionls
+namespace Edge_Detection
 {
-    public class EdgeDetectorProgram
+    public class Program
     {
-
         public static void Main(string[] args)
         {
-            string? input;
-
-            Console.WriteLine("Enter path/to/image: ");
-            input = Console.ReadLine();
-            if (string.IsNullOrEmpty(input))
+            string imagePath = GetInput("Enter path/to/image: ");
+            if (string.IsNullOrEmpty(imagePath))
             {
                 Console.WriteLine("No input provided. Exiting program.");
                 return;
             }
-            string imagePath = input;
+            if (!IsValidImagePath(imagePath))
+            {
+                Console.WriteLine("Ivalid Image path, the extensions accepted are [.jpeg, .jpg, and .png]");
+                return;
+            }
 
-            Console.WriteLine("Enter operator name [Sobel, Prewitt]: ");
-            input = Console.ReadLine();
-            if (string.IsNullOrEmpty(input))
+                string operatorString = GetInput("Enter operator name [Sobel, Prewitt]: ");
+            if (string.IsNullOrEmpty(operatorString))
             {
                 Console.WriteLine("No input provided. Exiting program.");
                 return;
             }
-            string operatorString = input;
 
-            Console.WriteLine("Enter output/path/to/image ");
-            input = Console.ReadLine();
-            string output;
-            if (string.IsNullOrEmpty(input))
+            string output = GetInput("Enter output/path/to/image ");
+            if (string.IsNullOrEmpty(output))
             {
                 Console.WriteLine("No input provided. Storing the image as output.png");
                 output = "output.png";
             }
-            else
-                output = input;
 
             DetectionOperator detectionOperator;
             if (operatorString.Equals("Sobel", StringComparison.OrdinalIgnoreCase))
@@ -67,6 +61,32 @@ namespace Edge_Detectionls
             {
                 outputImage.Encode(SKEncodedImageFormat.Png, 100).SaveTo(outputStream);
             }
+        }
+
+        private static string GetInput(string prompt)
+        {
+            Console.WriteLine(prompt);
+            string? input = Console.ReadLine();
+            if (string.IsNullOrEmpty(input))
+            {
+                Console.WriteLine("No Input provided...");
+                input = "";
+            }
+            return input;
+        }
+
+        private static bool IsValidImagePath(string inputString)
+        {
+            string[] parts = inputString.Split('.');
+            if (parts.Length > 1)
+            {
+                string lastExtension = parts[^1];
+                if (string.Equals(lastExtension, "png") || string.Equals(lastExtension, "jpeg") || string.Equals(lastExtension, "jpg"))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
