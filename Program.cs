@@ -19,7 +19,7 @@ namespace Edge_Detection
                 return;
             }
 
-                string operatorString = GetInput("Enter operator name [Sobel, Prewitt]: ");
+            string operatorString = GetInput("Enter operator name [Sobel, Prewitt]: ");
             if (string.IsNullOrEmpty(operatorString))
             {
                 Console.WriteLine("No input provided. Exiting program.");
@@ -31,6 +31,11 @@ namespace Edge_Detection
             {
                 Console.WriteLine("No input provided. Storing the image as output.png");
                 output = "output.png";
+            }
+            if (!IsValidImagePath(output))
+            {
+                Console.WriteLine("Invalid output path provided");
+                return;
             }
 
             DetectionOperator detectionOperator;
@@ -48,18 +53,26 @@ namespace Edge_Detection
                 return;
             }
 
-            using var rawData = File.OpenRead(imagePath);
-            using var inputStream = new SKManagedStream(rawData);
-            using var image = SKBitmap.Decode(inputStream);
-            if (image == null)
+            ImageHandler image = new();
+            try
             {
-                Console.WriteLine("Error opening image file");
-                return;
+                image.LoadImage(imagePath);
             }
-            SKBitmap outputImage = Detector.DetectEdges(image, detectionOperator);
-            using (var outputStream = File.OpenWrite(output))
+            catch (ArgumentException)
             {
+                Console.WriteLine("Invalid Image path provided");
+                return;
+
+            }
+            try
+            {
+                SKBitmap outputImage = Detector.DetectEdges(image.GetValidBitmap(), detectionOperator);
+                using var outputStream = File.OpenWrite(output);
                 outputImage.Encode(SKEncodedImageFormat.Png, 100).SaveTo(outputStream);
+            }
+            catch (InvalidOperationException)
+            {
+                Console.WriteLine("Could not load or convert image");
             }
         }
 
