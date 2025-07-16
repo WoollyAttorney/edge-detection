@@ -37,8 +37,8 @@ namespace Edge_Detection.Core
                 for (var x = 0; x < bitmap.Width; x++)
                 {
                     SKColor rgbPixel = bitmap.GetPixel(x, y);
-                    uint gray = (uint)Math.Clamp(((int)rgbPixel.Red * colorWeights[0] + (int)rgbPixel.Green * colorWeights[1] + (int)rgbPixel.Blue * colorWeights[2]) / (colorWeights[0] + colorWeights[1] + colorWeights[2]), 0, 255);
-                    SKColor grayPixel = new(gray);
+                    byte gray = (byte)Math.Clamp(((int)rgbPixel.Red * colorWeights[0] + (int)rgbPixel.Green * colorWeights[1] + (int)rgbPixel.Blue * colorWeights[2]) / (colorWeights[0] + colorWeights[1] + colorWeights[2]), 0, 255);
+                    SKColor grayPixel = new(gray, gray, gray);
                     grayscale.SetPixel(x, y, grayPixel);
                 }
             }

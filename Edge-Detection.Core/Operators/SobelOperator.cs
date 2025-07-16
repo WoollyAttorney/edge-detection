@@ -16,9 +16,7 @@ namespace Edge_Detection.Core
         };
         public override SkiaSharp.SKBitmap DetectEdge(SkiaSharp.SKBitmap image)
         {
-            SkiaSharp.SKBitmap resultX = Convolution.ApplyKernel(image, kernelX);
-            SkiaSharp.SKBitmap resultY = Convolution.ApplyKernel(image, kernelY);
-            SkiaSharp.SKBitmap result = Convolution.CombineResults(resultX, resultY);
+            SkiaSharp.SKBitmap result = Convolution.ApplyKernels(image, kernelX, kernelY);
             return result;
         }
     }
