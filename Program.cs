@@ -58,12 +58,15 @@ namespace Edge_Detection
             {
                 image.LoadImage(imagePath);
             }
-            catch (ArgumentException)
+            catch (Exception e)
             {
-                Console.WriteLine("Invalid Image path provided");
-                return;
-
+                if (e is ArgumentException or FileNotFoundException)
+                {
+                    Console.WriteLine("Invalid Image path provided");
+                    return;
+                }
             }
+
             try
             {
                 SKBitmap outputImage = Detector.DetectEdges(image.GetValidBitmap(), detectionOperator);
