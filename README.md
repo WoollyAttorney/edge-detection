@@ -1,3 +1,5 @@
+[![Build](https://github.com/WoollyAttorney/edge-detection/actions/workflows/build.yml/badge.svg)](https://github.com/WoollyAttorney/edge-detection/actions/workflows/build.yml)
+
 # Edge-Detection
 A simple repository to test out basic edge detection techniques in C#. 
 It uses SkiaSharp library for image handling (only)
@@ -52,7 +54,5 @@ Running both operators on the images from resources produces the following resul
 | Lena             |     ![lena_bw](resources/input_images/lena_bw.jpeg)   |    ![lena_bw_sobel](resources/output_images/lena_bw_sobel.jpeg)    |    ![lena_bw_prewitt](resources/output_images/lena_bw_prewitt.jpeg)    |
 
 
-## TODO
-- [ ] Add tests with coverage
-- [ ] Add github actions for testing
+## TODOs
 - [ ] Optimize the convolution algorithm
