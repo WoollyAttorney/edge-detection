@@ -36,7 +36,8 @@ To run tests, use the following command:
 dotnet test -c Release
 ```
 
-## UML Class Diagram (TBD)
+## UML Class Diagram
+![UML Class Diagram](resources/uml_class_diagram.svg)
 
 
 ## Results
