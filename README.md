@@ -49,7 +49,6 @@ Running both operators on the images from resources produces the following resul
 
 
 ## TODO
-- [ ] Add the UML Class Diagram
 - [ ] Add tests with coverage
 - [ ] Add github actions for testing
 - [ ] Optimize the convolution algorithm
