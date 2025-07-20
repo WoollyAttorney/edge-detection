@@ -2,9 +2,13 @@
 A simple repository to test out basic edge detection techniques in C#. 
 It uses SkiaSharp library for image handling (only)
 
+## Dependencies
+- .NET SDK v9.0
+- SkiaSharp library v3.119.0
+- xunit (for testing) v2.9.2
 
 ## Installation and setup
-1. Install .NET SDK
+1. Install .NET SDK v9.0
    - Download and install the latest .NET SDK from [Microsoft's official site](https://dotnet.microsoft.com/download).
 2. Clone the repository
 ```shell
