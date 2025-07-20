@@ -28,4 +28,4 @@ jobs:
         run: dotnet build -c Release /p:BuildArch=${{ matrix.arch }}
 
       - name: run tests
-        run: dotnet test Edge_Detection.Tests -c Release
+        run: dotnet test Edge-Detection.Tests -c Release
