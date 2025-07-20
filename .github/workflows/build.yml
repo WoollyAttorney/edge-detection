@@ -1,0 +1,31 @@
+name: Build
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["*"]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        name: [ x64]
+        include:
+          - name: x64
+            arch: x64
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+
+      - name: setup dotnet
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            9.0.x
+
+      - name: build projects
+        run: dotnet build -c Release /p:BuildArch=${{ matrix.arch }}
+
+      - name: run tests
+        run: dotnet test Edge_Detection.Tests -c Release
